@@ -16,11 +16,7 @@ function linkfile() {
     fi
 }
 
-linkfile custom-apps-menu/applications-override.json  ~/.local/share/cinnamon/applets/custom-apps-menu@sahil87/applications-override.json                        0
-linkfile ssh/config                 ~/.ssh/config                           0
-linkfile ansible/.ansible.cfg       ~/.ansible.cfg                          0
-linkfile git/.gitconfig             ~/.gitconfig                            0
-linkfile sysctl/40-max-user-watches.conf /etc/sysctl.d/40-max-user-watches.conf       1
+# linkfile git/.gitconfig             ~/.gitconfig                            0
 
 #Not linking vscode - syncing through the sync plugin
 # linkfile vscode/snippets            ~/.config/Code/User/snippets            0

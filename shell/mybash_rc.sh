@@ -113,9 +113,16 @@ alias get='git '
 alias g='git'
 alias d='docker'
 
-alias sc='cd ~/code/sportscafe/'
-alias 87='cd $DIR/..'
-alias aws-add-creds='source $DIR/../revealed/keys/aws_iam_keys/sportscafe/export.sh'
+alias rtime="timedatectl set-ntp 0;timedatectl set-ntp 1"
+
+alias rwifi="nmcli r wifi off; nmcli r wifi on"
+alias cw="nmcli c up"
+alias cwslasher="nmcli c up 'Slasher'"
+alias cwdelta="nmcli c up 'DELTA 5G'"
+alias cwhp="nmcli c up 'HP'"
+
+alias pyMusic="cd /home/neel/code/pyMusic/; python index.py"
+alias update_vscode_icon="sudo sed -i 's/Icon=code/Icon=vscode/g' /usr/share/applications/code.desktop"
 
 # Autocomplete for 'g' as well
 complete -o default -o nospace -F _git g
