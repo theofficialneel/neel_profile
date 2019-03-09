@@ -1,5 +1,9 @@
-# ** NEEL_PROFILE **
+## Neel_profile
+##### Based on myprofile/
 
-###### Based on myprofile/
+#### Guides
+#### Shell
+#### Dotfiles
 
-## Guides
+- ./add_to_bashrc.sh
+- ./linkfiles_ubuntu.sh
