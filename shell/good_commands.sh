@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# To stop linux from adding timezone to UTC
+timedatectl set-local-rtc 1 --adjust-system-clock
+
 #Adb over wifi
 #Had to remove android-tools-adb and install only adb (apt install adb) for below to work
 Connect Android phone and host machine to same WiFi network

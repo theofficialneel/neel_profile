@@ -121,7 +121,6 @@ alias cwslasher="nmcli c up 'Slasher'"
 alias cwdelta="nmcli c up 'DELTA 5G'"
 alias cwhp="nmcli c up 'HP'"
 
-alias pyMusic="cd /home/neel/code/pyMusic/; python index.py"
 alias update_vscode_icon="sudo sed -i 's/Icon=code/Icon=vscode/g' /usr/share/applications/code.desktop"
 
 # Autocomplete for 'g' as well
@@ -167,5 +166,15 @@ mkcd() {
                 echo "Usage: mkcd <dir>"
         else
                 mkdir -p $1 && cd $1
+        fi
+}
+
+lsg() {
+        if [ $# == 1 ]; then
+            ls | grep $1
+        elif [ $# == 2 ]; then
+            ls $1 | grep $2
+        else
+            echo "Error: enter 1 | 2 argument/s"
         fi
 }
