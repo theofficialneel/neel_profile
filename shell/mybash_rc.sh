@@ -56,7 +56,8 @@ GIT_STRING='$(__git_ps1 " [%s]")'
 #END_CHARACTER=$'\u26A1' #Lightning
 END_CHARACTER='\$'
 test -f /.dockerinit && END_CHARACTER='&'
-PS1="${DARK_GRAY}[\A] ${GREEN}\u@${RED}\h:${YELLOW}\w${NORMAL}${CYAN}${GIT_STRING} ${LIGHT_YELLOW}${END_CHARACTER} ${NORMAL}"
+PS1="${DARK_GRAY}[\A]${RED}\u${GREEN}@:${YELLOW}\w${NORMAL}${CYAN}${GIT_STRING} ${LIGHT_YELLOW}${END_CHARACTER} ${NORMAL}"
+#PS1="${DARK_GRAY}[\A] ${GREEN}\u@${RED}\h:${YELLOW}\w${NORMAL}${CYAN}${GIT_STRING} ${LIGHT_YELLOW}${END_CHARACTER} ${NORMAL}"
 export PS1
 #export PS1="${DARK_GRAY}[\A] ${GREEN}\u@${RED}\h:${YELLOW}\w${NORMAL} ${CYAN}${GIT_STRING}${LIGHT_GRAY}$ ${NORMAL}"
 #export PS1="\[$(tput setaf 2)\]\u@\[$(tput setaf 1)\]\h:\[$(tput setaf 4)\]\W$ \[$(tput sgr0)\]"
@@ -122,6 +123,7 @@ alias cwdelta="nmcli c up 'DELTA 5G'"
 alias cwhp="nmcli c up 'HP'"
 
 alias update_vscode_icon="sudo sed -i 's/Icon=code/Icon=vscode/g' /usr/share/applications/code.desktop"
+alias condapython="~/anaconda3/bin/python "
 
 # Autocomplete for 'g' as well
 complete -o default -o nospace -F _git g
@@ -171,9 +173,9 @@ mkcd() {
 
 lsg() {
         if [ $# == 1 ]; then
-            ls | grep $1
+            ls -a | grep $1
         elif [ $# == 2 ]; then
-            ls $1 | grep $2
+            ls -a $1 | grep $2
         else
             echo "Error: enter 1 | 2 argument/s"
         fi
