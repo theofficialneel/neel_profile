@@ -1,4 +1,3 @@
-#From https://github.com/durdn/cfg/blob/master/.gitconfig
 # core {{{
 [core]
     pager=less -x4
@@ -12,9 +11,9 @@
 #}}}
 # user {{{
 [user]
-    name = Sahil Ahuja
-    email = sahilahuja@gmail.com
-    username = sahil87
+    name = Neel Akash
+    email = theofficialneel@gmail.com
+    username = theofficialneel
 
 #}}}
 # color {{{

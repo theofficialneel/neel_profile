@@ -1,5 +1,5 @@
 #!/bin/bash
-#In .bashrc
+# In .bashrc
 
 # If not running interactively, don't do anything
 case $- in
@@ -7,19 +7,13 @@ case $- in
       *) return;;
 esac
 
-#To support emacs and byobu
+# To support emacs and byobu
 export TERM=xterm-256color
 
 PARENTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/../ && pwd )"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-#RVM SETTINGS
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-PATH=$PATH:~/.rvm/bin:.:$PARENTDIR/bin
-export PATH
-
-#BASH HISTORY
+# BASH HISTORY
 export HISTSIZE=10000
 export HISTFILESIZE=100000
 export PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
@@ -33,52 +27,48 @@ export HISTIGNORE="&:ls:[bf]g:exit"
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# $PS1 customization
 # Prompt. http://misc.flogisoft.com/bash/tip_colors_and_formatting
 # Custom shell prompt via kirsle.net/wizards/ps1.html
 RED='\[\e[31m\]'
 GREEN='\[\e[32m\]'
-YELLOW='\[\e[33m\]'
+BROWN='\[\e[33m\]'
 BLUE='\[\e[34m\]'
-BOLD_BLUE='\[\e[1;34m\]'
 MAGENTA='\[\e[35m\]'
 CYAN='\[\e[36m\]'
-LIGHT_GRAY='\[\e[37m\]'
-DARK_GRAY='\[\e[90m\]'
 LIGHT_YELLOW='\[\e[93m\]'
 NORMAL='\[\e[0m\]'
+
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUPSTREAM=1
 GIT_PS1_DESCRIBE_STYLE=branch
 source /usr/lib/git-core/git-sh-prompt
-GIT_STRING='$(__git_ps1 " [%s]")'
+GIT_STRING='$(__git_ps1 " (%s)")'
+
 #END_CHARACTER=$'\u26A1' #Lightning
 END_CHARACTER='\$'
 test -f /.dockerinit && END_CHARACTER='&'
-PS1="${DARK_GRAY}[\A]${RED}\u${GREEN}@:${YELLOW}\w${NORMAL}${CYAN}${GIT_STRING} ${LIGHT_YELLOW}${END_CHARACTER} ${NORMAL}"
-#PS1="${DARK_GRAY}[\A] ${GREEN}\u@${RED}\h:${YELLOW}\w${NORMAL}${CYAN}${GIT_STRING} ${LIGHT_YELLOW}${END_CHARACTER} ${NORMAL}"
-export PS1
-#export PS1="${DARK_GRAY}[\A] ${GREEN}\u@${RED}\h:${YELLOW}\w${NORMAL} ${CYAN}${GIT_STRING}${LIGHT_GRAY}$ ${NORMAL}"
-#export PS1="\[$(tput setaf 2)\]\u@\[$(tput setaf 1)\]\h:\[$(tput setaf 4)\]\W$ \[$(tput sgr0)\]"
 
+PS1="${GREEN}😎 ${RED}\u${BROWN}@\h ${LIGHT_YELLOW}\w${NORMAL}${CYAN}${GIT_STRING} ${MAGENTA}${END_CHARACTER} ${NORMAL}"
+export PS1
+
+# apt commands
+alias install='sudo apt-get install'
+alias remove='sudo apt-get remove'
+alias update='sudo apt-get update'
+alias upgrade='sudo apt-get update && sudo apt-get upgrade'
+
+# cd improvements
 alias cd..='cd ../' # Go back 1 directory level (for fast typers)
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .3='cd ../../../'    # Go back 3 directory levels
 alias .4='cd ../../../../' # Go back 4 directory levels
-alias .5='cd ../../../../../'   # Go back 5 directory levels
-alias .6='cd ../../../../../../'  # Go back 6 directory levels
 
-alias p8='ping 8.8.8.8'
-
-alias install='sudo apt-get install'
-alias remove='sudo apt-get remove'
-alias update='sudo apt-get update'
-alias upgrade='sudo apt-get update && sudo apt-get upgrade'
-
-#Ls improvements
+# ls improvements
 alias ls='ls -F --color=auto'
 alias ll='ls -hl'
 alias lla='ls -ahl'
@@ -90,21 +80,22 @@ alias rm="rm -i"
 alias cp="cp -i"
 alias mv="mv -i"
 
-alias gs='git status '
-alias ga='git add '
-alias gaa='git add -A'
-alias gb='git branch '
+# git improvements
+alias gs='git status'
+alias ga='git add'
+alias gb='git branch'
 alias gbv='git branch -vv'
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gd='git diff'
-alias go='git checkout '
-alias gco='git checkout '
+alias go='git checkout'
+alias gco='git checkout'
 alias gl='git log --all --graph --decorate --oneline'
 alias p='git pull'
 alias gp='git push'
 alias gm='git merge'
 alias gr='git remote'
+alias grv='git remote -vv'
 
 alias gk='gitk --all&'
 alias gx='gitx --all'
@@ -114,16 +105,15 @@ alias get='git '
 alias g='git'
 alias d='docker'
 
-alias rtime="timedatectl set-ntp 0;timedatectl set-ntp 1"
 
-alias rwifi="nmcli r wifi off; nmcli r wifi on"
+alias rwifi="nmcli r wifi off && nmcli r wifi on"
 alias cw="nmcli c up"
 alias cwslasher="nmcli c up 'Slasher'"
 alias cwdelta="nmcli c up 'DELTA 5G'"
-alias cwhp="nmcli c up 'HP'"
 
-alias update_vscode_icon="sudo sed -i 's/Icon=code/Icon=vscode/g' /usr/share/applications/code.desktop"
-alias condapython="~/anaconda3/bin/python "
+alias ticks="echo '\`\`' | xclip -selection c; echo 'Backticks copied to clipboard'"
+alias p8='ping 8.8.8.8'
+alias pymusic="cd ~/code/pyMusic/py_music && python main.py"
 
 # Autocomplete for 'g' as well
 complete -o default -o nospace -F _git g
@@ -180,3 +170,15 @@ lsg() {
             echo "Error: enter 1 | 2 argument/s"
         fi
 }
+
+title="
+    ██████╗  █████╗ ███████╗██╗  ██╗    
+    ██╔══██╗██╔══██╗██╔════╝██║  ██║    
+    ██████╔╝███████║███████╗███████║    
+    ██╔══██╗██╔══██║╚════██║██╔══██║    
+    ██████╔╝██║  ██║███████║██║  ██║    
+    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝slash
+"
+
+echo -ne "\e[35m"
+echo "${title}"

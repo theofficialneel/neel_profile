@@ -6,6 +6,27 @@ timedatectl set-local-rtc 1 --adjust-system-clock
 # Open Configure Yakuake
 [ ctrl + shift + , ]
 
+# Attach album art to mp3
+lame --ti /path/xyz.jpg audio.mp3
+
+# Update VS code icon glitch
+sudo sed -i 's/Icon=code/Icon=vscode/g' /usr/share/applications/code.desktop
+
+# Fix dual boot time issues
+timedatectl set-ntp 0;timedatectl set-ntp 1
+
+# Python SimpleHTTPServer
+python -m SimpleHTTPServer 8000
+python3 -m http.server
+
+#Tar:
+tar -czfv whereToCompress.tar.gz whatToCompress/
+tar -xzfv whatToUncompress.tar.gz whereToUncompress/
+#c compress, x uncompress, z gzip, j bz2
+
+#Quick SCP
+tar -czfv - folderName/ | ssh user@hostname 'cd whereIwantToUnzip && tar -xzfv -'
+
 #Adb over wifi
 #Had to remove android-tools-adb and install only adb (apt install adb) for below to work
 Connect Android phone and host machine to same WiFi network
@@ -19,14 +40,6 @@ adb connect 10.0.0.41:5555  #After disconnecting USB
 adb reverse tcp:4050 tcp:4050; adb reverse tcp:4052 tcp:4052; adb reverse tcp:4053 tcp:4053;
 #To run adb command on specific device:
 adb -s 10.0.0.41:5555 shell ip -f inet addr show wlan0
-
-#Tar:
-tar -czfv whereToCompress.tar.gz whatToCompress/
-tar -xzfv whatToUncompress.tar.gz whereToUncompress/
-#c compress, x uncompress, z gzip, j bz2
-
-#Quick SCP
-tar -czfv - folderName/ | ssh user@hostname 'cd whereIwantToUnzip && tar -xzfv -'
 
 #SCP through proxy
 scp  -o "ProxyCommand ssh -p 2222 gw.sportscafe.in nc %h %p" api-prod10.web.int.sg.aws.sportscafe.in:/home/sahil/api-log.tar.gz .
@@ -124,4 +137,4 @@ usermod -a -G sudo,admin,docker [username]
 #Adding github keys:
 echo "%admin ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/admin
 cd ~; mkdir .ssh; touch .ssh/authorized_keys;
-curl https://github.com/sahil87.keys >> .ssh/authorized_keys
+curl https://github.com/theofficialneel.keys >> .ssh/authorized_keys
