@@ -28,8 +28,6 @@ export HISTIGNORE="&:ls:[bf]g:exit"
 shopt -s checkwinsize
 
 # $PS1 customization
-# Prompt. http://misc.flogisoft.com/bash/tip_colors_and_formatting
-# Custom shell prompt via kirsle.net/wizards/ps1.html
 RED='\[\e[31m\]'
 GREEN='\[\e[32m\]'
 BROWN='\[\e[33m\]'
@@ -47,11 +45,11 @@ GIT_PS1_DESCRIBE_STYLE=branch
 source /usr/lib/git-core/git-sh-prompt
 GIT_STRING='$(__git_ps1 " (%s)")'
 
-#END_CHARACTER=$'\u26A1' #Lightning
-END_CHARACTER='\$'
+# END_CHARACTER=$'\u26A1 >' # Lightning
+END_CHARACTER='\$ >'
 test -f /.dockerinit && END_CHARACTER='&'
 
-PS1="${GREEN}😎 ${RED}\u${BROWN}@\h ${LIGHT_YELLOW}\w${NORMAL}${CYAN}${GIT_STRING} ${MAGENTA}${END_CHARACTER} ${NORMAL}"
+PS1="\n${RED}\u${BROWN}@\H ${LIGHT_YELLOW}\w${CYAN}${GIT_STRING}\n${RED}${END_CHARACTER} ${NORMAL}"
 export PS1
 
 # apt commands
@@ -72,8 +70,6 @@ alias .4='cd ../../../../' # Go back 4 directory levels
 alias ls='ls -F --color=auto'
 alias ll='ls -hl'
 alias lla='ls -ahl'
-alias sl="ls"
-alias l="ls"
 
 # Make these commands ask before clobbering a file. Use -f to override.
 alias rm="rm -i"
@@ -100,12 +96,7 @@ alias grv='git remote -vv'
 alias gk='gitk --all&'
 alias gx='gitx --all'
 
-alias got='git '
-alias get='git '
-alias g='git'
-alias d='docker'
-
-
+# Wifi commands
 alias rwifi="nmcli r wifi off && nmcli r wifi on"
 alias cw="nmcli c up"
 alias cwslasher="nmcli c up 'Slasher'"
@@ -113,35 +104,41 @@ alias cwdelta="nmcli c up 'DELTA 5G'"
 
 alias ticks="echo '\`\`' | xclip -selection c; echo 'Backticks copied to clipboard'"
 alias p8='ping 8.8.8.8'
-alias pymusic="cd ~/code/pyMusic/py_music && python main.py"
+
+# Device specifics
+alias gpu="lspci -vnnn | perl -lne 'print if /^\d+\:.+(\[\S+\:\S+\])/' | grep VGA"
+alias backlight="sudo xmodmap -e 'add mod3 = Scroll_Lock'"
+
+# Execs
+alias pymusic="cd ~/code/pyMusic/py_music && python3 main.py"
+alias :q="exit"
 
 # Autocomplete for 'g' as well
 complete -o default -o nospace -F _git g
 
 #Functions
 extract () {
-  if [ -f $1 ] ; then
-      case $1 in
-          *.tar.bz2)   tar xvjf $1    ;;
-          *.tar.gz)    tar xvzf $1    ;;
-          *.bz2)       bunzip2 $1     ;;
-          *.rar)       rar x $1       ;;
-          *.gz)        gunzip $1      ;;
-          *.tar)       tar xvf $1     ;;
-          *.tbz2)      tar xvjf $1    ;;
-          *.tgz)       tar xvzf $1    ;;
-          *.zip)       unzip $1       ;;
-          *.Z)         uncompress $1  ;;
-          *.7z)        7z x $1        ;;
-          *)           echo "don't know how to extract '$1'..." ;;
-      esac
-  else
-      echo "'$1' is not a valid file!"
-  fi
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xvjf $1    ;;
+            *.tar.gz)    tar xvzf $1    ;;
+            *.bz2)       bunzip2 $1     ;;
+            *.rar)       rar x $1       ;;
+            *.gz)        gunzip $1      ;;
+            *.tar)       tar xvf $1     ;;
+            *.tbz2)      tar xvjf $1    ;;
+            *.tgz)       tar xvzf $1    ;;
+            *.zip)       unzip $1       ;;
+            *.Z)         uncompress $1  ;;
+            *.7z)        7z x $1        ;;
+            *)           echo "don't know how to extract '$1'..." ;;
+        esac
+    else
+        echo "'$1' is not a valid file!"
+    fi
 }
 
-function swap()
-{ # Swap 2 filenames around, if they exist (from Uzi's bashrc).
+function swap() {
     local TMPFILE=tmp.$$
 
     [ $# -ne 2 ] && echo "swap: 2 arguments needed" && return 1
@@ -154,21 +151,21 @@ function swap()
 }
 
 mkcd() {
-        if [ $# != 1 ]; then
-                echo "Usage: mkcd <dir>"
-        else
-                mkdir -p $1 && cd $1
-        fi
+    if [ $# != 1 ]; then
+        echo "Usage: mkcd <dir>"
+    else
+        mkdir -p $1 && cd $1
+    fi
 }
 
 lsg() {
-        if [ $# == 1 ]; then
-            ls -a | grep $1
-        elif [ $# == 2 ]; then
-            ls -a $1 | grep $2
-        else
-            echo "Error: enter 1 | 2 argument/s"
-        fi
+    if [ $# == 1 ]; then
+        ls -a | grep $1
+    elif [ $# == 2 ]; then
+        ls -a $1 | grep $2
+    else
+        echo "Error: enter 1 | 2 argument/s"
+    fi
 }
 
 title="
