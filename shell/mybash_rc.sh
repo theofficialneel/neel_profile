@@ -28,6 +28,7 @@ export HISTIGNORE="&:ls:[bf]g:exit"
 shopt -s checkwinsize
 
 # $PS1 customization
+## Colors
 RED='\[\e[31m\]'
 GREEN='\[\e[32m\]'
 BROWN='\[\e[33m\]'
@@ -37,17 +38,23 @@ CYAN='\[\e[36m\]'
 LIGHT_YELLOW='\[\e[93m\]'
 NORMAL='\[\e[0m\]'
 
+## Git strings
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUPSTREAM=1
 GIT_PS1_DESCRIBE_STYLE=branch
-source /usr/lib/git-core/git-sh-prompt
-GIT_STRING='$(__git_ps1 " (%s)")'
+GIT_FILE=/usr/lib/git-core/git-sh-prompt
+if test -f "$GIT_FILE"; then
+    source $GIT_FILE
+    GIT_STRING='$(__git_ps1 " (%s)")'
+    END_CHARACTER='\$ >'
+else
+    GIT_STRING=''
+    END_CHARACTER='😎 >'
+fi
 
 # END_CHARACTER=$'\u26A1 >' # Lightning
-END_CHARACTER='\$ >'
-test -f /.dockerinit && END_CHARACTER='&'
 
 PS1="\n${RED}\u${BROWN}@\H ${LIGHT_YELLOW}\w${CYAN}${GIT_STRING}\n${RED}${END_CHARACTER} ${NORMAL}"
 export PS1
